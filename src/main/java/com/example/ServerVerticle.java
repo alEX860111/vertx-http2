@@ -36,10 +36,12 @@ final class ServerVerticle extends AbstractVerticle {
 
         resp.push(HttpMethod.GET, "/script.js", asyncResult -> {
           if (asyncResult.succeeded()) {
+            // push can be sent
             LOGGER.info("sending push");
             final HttpServerResponse pushedResp = asyncResult.result();
             pushedResp.sendFile("script.js");
           } else {
+            // push cannot be sent
             LOGGER.error(asyncResult.cause().getMessage());
           }
         });
